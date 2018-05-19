@@ -5,3 +5,7 @@
     }
 
     //CONFIG below
+    include_once ("classes/db.php");
+    
+    $con = DB::getConnection();
+?>
