@@ -1,3 +1,13 @@
+<?php 
+
+    //Allow the config
+    define('__CONFIG__', true);
+    //Require the config
+    require_once ('inc/config.php');
+
+?>
+
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,44 +22,19 @@
 <body>
     
 <div class="uk-section uk-container">
-  		<div class="uk-grid uk-child-width-1-3@s uk-child-width-1-1" uk-grid>
-			<form class="uk-form-stacked js-login">
 
-			    <div class="uk-margin">
-			        <label class="uk-form-label" for="form-stacked-text">Email</label>
-			        <div class="uk-form-controls">
-			            <input class="uk-input" id="form-stacked-text" type="email" required='required' placeholder="email@email.com">
-			        </div>
-			    </div>
-
-			    <div class="uk-margin">
-			        <label class="uk-form-label" for="form-stacked-text">Password</label>
-			        <div class="uk-form-controls">
-			            <input class="uk-input" id="form-stacked-text" type="password" required='required' placeholder="Your Password">
-			        </div>
-			    </div>
-
-			    <div class="uk-margin">
-			        <button class="uk-button uk-button-default" type="submit">Login</button>
-			    </div>
-
-			</form>
-  		</div>
+    <?php 
+        echo "<em>Hello There!</em> <br>";
+    ?>
+    <span style="font-weight:bold; font-size:14px; border-top:2px solid #EAEAEB;">Today is <?php echo date("D M d Y"); ?></span><br>
+    
+    <a href="login.php">Login</a>
+    <a href="register.php">Register</a>
+    
+    
   	</div>    
     
     
     
     
-    
-<!--JQUERY-->
-<script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>    
-    
-    
-    <!-- UIkit JS -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-rc.2/js/uikit.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-rc.2/js/uikit-icons.min.js"></script>
-</body>
-</html>
-
-
-
+<?php require_once("inc/footer.php"); ?>
