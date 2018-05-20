@@ -13,33 +13,34 @@
         $return = [];
         
         $email= Filter::String( $_POST['email'] );
+        $password = $_POST['password'];
+        
         
         //Make sure user doesn't already exit
-        $findUser = $con->prepare("SELECT user_id FROM users WHERE email = LOWER(:email) LIMIT 1");
+        $findUser = $con->prepare("SELECT user_id, password FROM users WHERE email = LOWER(:email) LIMIT 1");
         $findUser->bindParam(':email', $email, PDO::PARAM_STR); 
         $findUser->execute();
         
         if($findUser->rowCount() == 1){
             //If User exists
-            $return['error'] = "You already have an account...";
-            $return['is_logged_in'] = false;
+            $User = $findUser->fetch(PDO::FETCH_ASSOC);
+            
+            $user_id = (int) $User['user_id'];
+            $hash = (string) $User['password'];
+            
+            if(password_verify($password, $hash)){
+                //User is signed in
+                $return['redirect'] = '/PHP/dashboard.php';
+                
+                $_SESSION['user_id'] = $user_id;
+            } else {
+                //Invalid user-pass combo
+                $return['error'] = 'Invalid Login Credential(s)';
+            }
             
         } else {
             //Add user
-            
-            $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
-            
-            $addUser = $con->prepare("INSERT into users(email, password) VALUES(LOWER(:email), :password)");
-            $addUser->bindParam(':email', $email, PDO::PARAM_STR);
-            $addUser->bindParam(':password', $password, PDO::PARAM_STR);
-            $addUser->execute();
-            
-            $user_id = $con->lastInsertId();
-            
-            $_SESSION['user_id'] = (int) $user_id;
-            
-            $return['redirect'] = '/PHP/dashboard.php?message=welcome';
-            $return['is_logged_in'] = true;
+            $return['error'] = "You do not have an account. <a href='/PHP/register.php'>Register Now?</a>";
         }
         
         //Make sure the user can be, and is, added
@@ -55,8 +56,4 @@
         //Die
         exit("Something went wrong...");
     }
-
-    
-
-
 ?>
