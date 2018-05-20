@@ -10,7 +10,7 @@
 ?>
 
 
-<!DOCTYPE html>
+<!DOCTYPE html> 
 <html>
 <head>
 <meta charset="utf-8">
@@ -25,7 +25,9 @@
     
     <div class="uk-section uk-container">
 DASHBOARD<br>
-You are logged in as <?php echo $_SESSION['user_id'] ?>.
+You are logged in as <?php echo $_SESSION['user_id'] ?>.<br>
+        <a href="/PHP/logout.php">Log Out</a>
+        
   	</div>    
     
 <?php require_once("inc/footer.php"); ?>
