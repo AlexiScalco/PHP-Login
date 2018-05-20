@@ -5,7 +5,14 @@
     }
 
     //CONFIG below
+
+    //Allow Errors
+    error_reporting(-1);
+    ini_set('display_errors', 'On');
+
+
     include_once ("classes/db.php");
+    include_once ("classes/filter.php");
     
     $con = DB::getConnection();
 ?>
