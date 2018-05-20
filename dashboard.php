@@ -5,8 +5,7 @@
     //Require the config
     require_once ('inc/config.php');
 
-//    echo $_SESSION['user_id'] . ' is your User ID.';
-//    exit;
+ forceLogin();
 
 ?>
 
@@ -25,7 +24,8 @@
 <body>
     
     <div class="uk-section uk-container">
-DASHBOARD (YOU'RE LOGGED IN)    
+DASHBOARD<br>
+You are logged in as <?php echo $_SESSION['user_id'] ?>.
   	</div>    
     
 <?php require_once("inc/footer.php"); ?>
