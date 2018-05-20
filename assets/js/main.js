@@ -5,19 +5,19 @@ $(document)
     var _form = $(this);
     var _error = $(".js-error", _form);
     
-    var _data = {
+    var dataObj = {
         email: $("input[type='email']", _form).val(),
         password: $("input[type='password']", _form).val()
     };
     
-    if (_data.email.length < 6){
+    if (dataObj.email.length < 6){
         _error
             .text("Please enter a valid e-mail address...")
             .show();
         
         return false;
         
-    } else if (_data.password.length < 8) {
+    } else if (dataObj.password.length < 8) {
         _error
             .text("Password must be at least 8 characters long...")
             .show();
@@ -25,8 +25,32 @@ $(document)
         return false;
     }
     
+    //begin ajax
     _error.hide();
     
-    return false;
+    $.ajax({
+        type: 'POST',
+        url: '/PHP/ajax/register.php',
+        data: dataObj,
+        dataTyle: 'json',
+        async: true
+    })
+    .done(function ajaxDone(data){
+        //Whatever data is
+        console.log(data);
+        if(data.redirect !== undefined){
+            window.location = data.redirect
+        }
+        alert(data.name);
+    })
+    .fail(function ajaxFailed(e){
+        //Failed
+        console.log(e);
+    })
+    .always(function ajaxAlwaysDoThis(data){
+        //Always do
+        console.log("Always");
+    })
     
-})
+    return false;
+});
